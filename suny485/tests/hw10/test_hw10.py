@@ -5,6 +5,7 @@ from suny485.projects.hw10.fruit_query import is_it_a_fruit
 Test cases for the types of inputs that are allowed to be added
 Identifying what could happen if we use different list types
 If I add in the wrong input, a error should appear.
+If I capitalize the string, would it raise an error or pass?
 """
 
 class TestFruitHappy(object):
@@ -40,3 +41,12 @@ class TestFruitInt(object):
     def test_fruit_int(self):
         assert is_it_a_fruit('3') == False
 
+
+class TestFruitFloat(object):
+    def test_fruit_float(self):
+        assert is_it_a_fruit('2.0') == False
+
+
+class TestFruitCap(object):
+    def test_cap_fruit(self):
+        assert is_it_a_fruit('Pear') == False
