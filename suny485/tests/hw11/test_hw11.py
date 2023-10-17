@@ -11,16 +11,13 @@ Raises KeyError for tuple, Raises TypeError for list and set
 class TestFormalHappy(object):
     def test_happy_formal(self):
         assert get_formal_name('apple') == 'Malus domestica'
+        assert get_formal_name('strawberry') == 'Fragaria × ananassa'
+
 
 class TestFormalUnhappy(object):
     def test_unhappy_formal(self):
         with pytest.raises(KeyError):
             assert get_formal_name('cantaloupe') != 'Prunus avium'
-
-
-class TestFormalSberry(object):
-    def test_sberry_formal(self):
-        assert get_formal_name('strawberry') == 'Fragaria × ananassa'
 
 
 class TestKeyFormal(object):
@@ -29,22 +26,17 @@ class TestKeyFormal(object):
             assert get_formal_name('Persea americana') != '5'
 
 
-class TestFormalList(object):
-    def test_list_error(self):
+class TestTypeError(object):
+    def test_type_error(self):
         with pytest.raises(TypeError):
             assert get_formal_name(['apple','banana']) == False
+            assert get_formal_name({'orange', 'strawberry'}) == True
 
 
 class TestFormalCap(object):
     def test_cap_fruit(self):
         with pytest.raises(KeyError):
             assert get_formal_name('Apple') == 'Malus domestica'
-
-
-class TestFormalSet(object):
-    def test_formal_set(self):
-        with pytest.raises(TypeError):
-            assert get_formal_name({'orange', 'strawberry'}) == True
 
 
 class TestFormalTuple(object):
