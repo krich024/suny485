@@ -1,7 +1,4 @@
-
-
-
-def get_formal_name(fruit: object) -> object:
+def get_formal_name(fruit):
     """
     Get the scientific name for the supplied `fruit` common name.
 
