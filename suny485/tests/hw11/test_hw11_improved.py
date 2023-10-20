@@ -1,10 +1,28 @@
 import pytest
 from suny485.projects.hw11.hw11_improved import get_formal_name
 """
-If I assign the function to be list, set, tuple then it will lead to me a unhappy path
-It will do the same if I used int or float as a dict key
-What would happen if I assign a dict key to the wrong value? A KeyError is raised (unhappy path)
-If I switched the dict value and equal it to the key value, it will not be equal
+Test Cases:
+happy path:
+    - inputs:
+       - values that match the correct key
+unhappy path:
+    - inputs:
+       - values that don't match the correct key
+       - switching dict value and key value
+       - using ints as key (for listed ordered ex: apple is 1, banana is 2 etc.
+KeyError:
+    - inputs:
+        - tuples
+        - dict key that doesn't belong to dict value
+        - capitalizing key value that will not match with dict value
+TypeError:
+    - inputs:
+        - list, set   
+
+Try Except:
+    - inputs:
+       - every wrong key value prints the KeyError message given in code
+       - every wrong str prints the TypeError message given in code
 """
 
 
@@ -28,11 +46,6 @@ class TestIntFormal(object):
         assert get_formal_name('10') != 'Citrullus lanatus'
 
 
-class TestFloatFormal(object):
-    def test_float_formal(self):
-        assert get_formal_name('5.0') != 'Vitis vinifera'
-
-
 class TestSetError(object):
     def test_set_error(self):
         assert get_formal_name({'apple', 'banana'}) != {'Malus domestica', 'Musa acuminata'}
@@ -51,3 +64,5 @@ class TestTupleError(object):
 class TestSwitchFormal(object):
     def test_switch_formal(self):
         assert get_formal_name('Prunus domestica') != 'plum'
+
+
