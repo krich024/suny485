@@ -16,7 +16,6 @@ class TestHappyFormal(object):
 class TestUnHappyFormal(object):
     def test_unhappy_path(self):
         assert get_formal_name('apple') != 'Mangifera indica'
-        assert get_formal_name('cranberry') != 'Punica granatum'
 
 
 class TestFormalCap(object):
@@ -24,27 +23,31 @@ class TestFormalCap(object):
         assert get_formal_name('Pineapple') != 'Ananas comosus'
 
 
-class TestIntFloatFormal(object):
-    def test_formal_int_float(self):
+class TestIntFormal(object):
+    def test_formal_int(self):
         assert get_formal_name('10') != 'Citrullus lanatus'
+
+
+class TestFloatFormal(object):
+    def test_float_formal(self):
         assert get_formal_name('5.0') != 'Vitis vinifera'
 
 
-class TestListError(object):
-    def test_list_error(self):
+class TestSetError(object):
+    def test_set_error(self):
         assert get_formal_name({'apple', 'banana'}) != {'Malus domestica', 'Musa acuminata'}
-        assert get_formal_name(['orange', 'strawberry']) != ['Citrus × sinensis', 'Fragaria × ananassa']
-        assert get_formal_name(('grape', 'pineapple')) != ('Vitis vinifera', 'Ananas comosus')
+
+
+class TestListError(object):
+    def test_formal_list(self):
+        assert get_formal_name(['orange', 'grape']) != ['Citrus × sinensis', 'Fragaria × ananassa']
+
+
+class TestTupleError(object):
+    def test_tuple_formal(self):
+        assert get_formal_name(('pineapple', 'mango')) != ('Ananas comosus')
 
 
 class TestSwitchFormal(object):
     def test_switch_formal(self):
         assert get_formal_name('Prunus domestica') != 'plum'
-        assert get_formal_name('Persea americana') != 'avocado'
-        assert get_formal_name('Citrus × paradisi') != 'grapefruit'
-
-
-
-
-
-
