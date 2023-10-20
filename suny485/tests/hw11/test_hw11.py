@@ -2,15 +2,28 @@ import pytest
 from suny485.projects.hw11.formal_fruit import get_formal_name
 
 '''
-The code should have a key that is equal to the value given in the dict
-If I add a nonexistent key that is equal to a nonexistent value, it should raise a KeyError
-If I create a test case for a list, tuple, set etc, it will raise a TypeError
-Raises KeyError for tuple, Raises TypeError for list and set
+Test Cases:
+happy path:
+    - inputs:
+       - values that match the correct key
+unhappy path:
+    - inputs:
+       - values that don't match the correct key
+       - using ints as key (for listed ordered ex: apple is 1, banana is 2 etc.
+KeyError:
+    - inputs:
+        - tuples
+        - dict key that doesn't belong to dict value
+        - capitalizing key value that will not match with dict value
+TypeError:
+    - inputs:
+        - list, set   
 '''
 
 class TestFormalHappy(object):
     def test_happy_formal(self):
         assert get_formal_name('apple') == 'Malus domestica'
+    def test_happy_key(self):
         assert get_formal_name('strawberry') == 'Fragaria × ananassa'
 
 
@@ -18,9 +31,12 @@ class TestFormalUnhappy(object):
     def test_unhappy_formal(self):
         with pytest.raises(KeyError):
             assert get_formal_name('cantaloupe') != 'Prunus avium'
+    def test_unhappy_key(self):
+        with pytest.raises(KeyError):
+            assert get_formal_name('peach') != 'Prunus avium'
 
 
-class TestKeyFormal(object):
+class TestKeyIntFormal(object):
     def test_key_error(self):
         with pytest.raises(KeyError):
             assert get_formal_name('Persea americana') != '5'
@@ -29,8 +45,11 @@ class TestKeyFormal(object):
 class TestTypeError(object):
     def test_type_error(self):
         with pytest.raises(TypeError):
-            assert get_formal_name(['apple','banana']) == False
-            assert get_formal_name({'orange', 'strawberry'}) == True
+            assert get_formal_name(['apple','banana']) == ['Malus domestica', 'Musa acuminata']
+
+    def test_set_error(self):
+        with pytest.raises(TypeError):
+            assert get_formal_name({'orange', 'strawberry'}) == {'Citrus × sinensis', 'Fragaria × ananassa'}
 
 
 class TestFormalCap(object):
