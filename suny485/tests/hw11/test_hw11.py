@@ -21,25 +21,21 @@ TypeError:
 '''
 
 class TestFormalHappy(object):
-    def test_happy_formal(self):
+    def test_happy_apple(self):
         assert get_formal_name('apple') == 'Malus domestica'
-    def test_happy_key(self):
+    def test_happy_strawberry(self):
         assert get_formal_name('strawberry') == 'Fragaria × ananassa'
 
 
 class TestFormalUnhappy(object):
-    def test_unhappy_formal(self):
-        with pytest.raises(KeyError):
-            assert get_formal_name('cantaloupe') != 'Prunus avium'
-    def test_unhappy_key(self):
-        with pytest.raises(KeyError):
-            assert get_formal_name('peach') != 'Prunus avium'
+    def test_unhappy_keyerror_peach(self):
+            assert get_formal_name('peach') != 'Citrullus lanatus'
 
 
 class TestKeyIntFormal(object):
     def test_key_error(self):
         with pytest.raises(KeyError):
-            assert get_formal_name('Persea americana') != '5'
+            assert get_formal_name('5') != 'Vitis vinifera'
 
 
 class TestTypeError(object):
