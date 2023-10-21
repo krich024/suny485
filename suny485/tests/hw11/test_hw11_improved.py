@@ -26,6 +26,18 @@ Try Except:
 """
 
 
+class TestBadKey(object):
+    def test_bad_key(self):
+        expected_message = 'This Key does not exist in this dict'
+        assert get_formal_name(10) == expected_message
+
+
+class TestTypeError(object):
+    def test_bad_type(self):
+        error_message = "This Type doesn't belong to dict"
+        assert get_formal_name(['']) == error_message
+
+
 class TestHappyFormal(object):
     def test_happy_formal(self):
         assert get_formal_name('grape') == 'Vitis vinifera'
