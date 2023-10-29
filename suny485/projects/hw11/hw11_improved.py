@@ -32,8 +32,7 @@ def get_formal_name(fruit):
         formal_name = fruit_dict[fruit]
         return formal_name
     except KeyError:
-       return "This Key does not exist in this dict"
+        return "This Key does not exist in this dict"
     except TypeError:
-        return "This Type doesn't belong to dict"
-
+        return "This doesn't belong to dict"
 
