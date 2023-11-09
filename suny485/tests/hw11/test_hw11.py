@@ -9,9 +9,9 @@ happy path:
 unhappy path:
     - inputs:
        - values that don't match the correct key
-       - using ints as key (for listed ordered ex: apple is 1, banana is 2 etc.
 KeyError:
     - inputs:
+        - using ints as key (for listed ordered ex: apple is 1, banana is 2 etc.
         - tuples
         - dict key that doesn't belong to dict value
         - capitalizing key value that will not match with dict value
@@ -23,13 +23,14 @@ TypeError:
 class TestFormalHappy(object):
     def test_happy_apple(self):
         assert get_formal_name('apple') == 'Malus domestica'
+
     def test_happy_strawberry(self):
         assert get_formal_name('strawberry') == 'Fragaria × ananassa'
 
 
 class TestFormalUnhappy(object):
     def test_unhappy_keyerror_peach(self):
-            assert get_formal_name('peach') != 'Citrullus lanatus'
+        assert get_formal_name('peach') != 'Citrullus lanatus'
 
 
 class TestKeyIntFormal(object):
@@ -41,7 +42,7 @@ class TestKeyIntFormal(object):
 class TestTypeError(object):
     def test_type_error(self):
         with pytest.raises(TypeError):
-            assert get_formal_name(['apple','banana']) == ['Malus domestica', 'Musa acuminata']
+            assert get_formal_name(['apple', 'banana']) == ['Malus domestica', 'Musa acuminata']
 
     def test_set_error(self):
         with pytest.raises(TypeError):
@@ -57,7 +58,4 @@ class TestFormalCap(object):
 class TestFormalTuple(object):
     def test_formal_tuple(self):
         with pytest.raises(KeyError):
-            assert get_formal_name(('mango', 'peach')) == True
-
-
-
+            assert get_formal_name(('mango', 'Mangifera indica')) == True
