@@ -9,15 +9,17 @@ unhappy path:
     - inputs:
        - values that don't match the correct key
        - switching dict value and key value
-       - using ints as key (for listed ordered ex: apple is 1, banana is 2 etc.
 KeyError:
     - inputs:
         - tuples
         - dict key that doesn't belong to dict value
         - capitalizing key value that will not match with dict value
+        - empty key
+        - int
 TypeError:
     - inputs:
-        - list, set   
+        - list, set  
+        - empty list, empty set
 
 Try Except:
     - inputs:
@@ -26,16 +28,25 @@ Try Except:
 """
 
 
-class TestBadKey(object):
-    def test_bad_key(self):
+class TestKeyError(object):
+    def test_error_key(self):
         expected_message = 'This Key does not exist in this dict'
-        assert get_formal_name(10) == expected_message
+        assert get_formal_name(expected_message)
 
 
 class TestTypeError(object):
-    def test_bad_type(self):
-        error_message = "This Type doesn't belong to dict"
-        assert get_formal_name(['']) == error_message
+    def test_error_type(self):
+        error_message = "This Type does not belong to dict"
+        assert get_formal_name(error_message)
+
+
+class TestBadInput(object):
+    def test_bad_input(self):
+        assert get_formal_name(5) == 'This Key does not exist in this dict'
+
+class TestTypeInput(object):
+    def test_type_input(self):
+        assert get_formal_name({''}) == 'This Type does not belong to dict'
 
 
 class TestHappyFormal(object):
@@ -53,11 +64,6 @@ class TestFormalCap(object):
         assert get_formal_name('Pineapple') != 'Ananas comosus'
 
 
-class TestIntFormal(object):
-    def test_formal_int(self):
-        assert get_formal_name('10') != 'Citrullus lanatus'
-
-
 class TestSetError(object):
     def test_set_error(self):
         assert get_formal_name({'apple', 'banana'}) != {'Malus domestica', 'Musa acuminata'}
@@ -70,7 +76,7 @@ class TestListError(object):
 
 class TestTupleError(object):
     def test_tuple_formal(self):
-        assert get_formal_name(('pineapple', 'mango')) != ('Ananas comosus')
+        assert get_formal_name(('pineapple', 'mango')) != ('Ananas comosus', 'Mangifera indica')
 
 
 class TestSwitchFormal(object):
@@ -78,3 +84,15 @@ class TestSwitchFormal(object):
         assert get_formal_name('Prunus domestica') != 'plum'
 
 
+class TestEmptyFormal(object):
+    def test_empty_formal(self):
+        assert get_formal_name('') != ''
+
+
+class TestEmptyList(object):
+    def test_empty_list(self):
+        assert get_formal_name(['']) != ['']
+
+class TestEmptySet(object):
+    def test_empty_set(self):
+        assert get_formal_name({''}) != {''}
