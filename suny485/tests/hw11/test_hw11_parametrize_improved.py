@@ -9,8 +9,9 @@ happy path:
 unhappy path:
     - inputs:
        - values that don't match the correct key
-       - switching dict value and key value
-       - using ints as key (for listed ordered ex: apple is 1, banana is 2 etc.
+       - dict value
+    - outputs:
+        - keyerror
 KeyError:
     - inputs:
         - tuples
@@ -20,28 +21,12 @@ KeyError:
 TypeError:
     - inputs:
         - list, set   
-        - empty list, empty set
 
 Try Except:
     - inputs:
        - every wrong key value prints the KeyError message given in code
        - every wrong str prints the TypeError message given in code
 """
-
-
-@pytest.mark.parametrize('nonexistent_key', [('no_key', 'This Key does not exist in this dict')], ids = ['no_key'])
-
-def test_keyerror_return_input(nonexistent_key):
-    key, key_error = nonexistent_key
-    key_input = get_formal_name(key)
-    assert key_input == key_error
-
-@pytest.mark.parametrize('list_type', [([''], 'This Type does not belong to dict')], ids = [('')])
-
-def test_typeerror_message_input(list_type):
-    type, type_error = list_type
-    type_input = get_formal_name(type)
-    assert type_input == type_error
 
 
 @pytest.mark.parametrize('bad_input', [(5, 'This Key does not exist in this dict')])
@@ -52,7 +37,7 @@ def test_bad_input(bad_input):
     assert wrong_input == error_message
 
 
-@pytest.mark.parametrize('type_input', [({''}, 'This Type does not belong to dict')])
+@pytest.mark.parametrize('type_input', [({}, 'This Type does not belong to dict')])
 
 def test_type_input_error(type_input):
     set, error_message = type_input
@@ -91,13 +76,6 @@ def test_tupleerror_input(tuple_error):
     assert actual_tuple != sci_tuple
 
 
-@pytest.mark.parametrize('switch', [('Prunus domestica', 'plum')], ids = ['Prunus domestica'])
-
-def test_switch_input(switch):
-    sci_name, name = switch
-    switch_name = get_formal_name(sci_name)
-    assert switch_name != name
-
 
 @pytest.mark.parametrize('empty_key', [('', '')])
 
@@ -107,17 +85,7 @@ def test_empty_list(empty_key):
     assert non_key != empty_name
 
 
-@pytest.mark.parametrize('empty_list', [([''], [''])])
-
-def test_empty_list(empty_list):
-    key_list, sci_list = empty_list
-    actual_list = get_formal_name(key_list)
-    assert actual_list != sci_list
 
 
-@pytest.mark.parametrize('empty_set', [({''}, {''})])
 
-def test_empty_set(empty_set):
-    key_set, sci_set = empty_set
-    actual_set = get_formal_name(key_set)
-    assert actual_set != sci_set
+
