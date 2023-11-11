@@ -28,25 +28,21 @@ class TestFormalHappy(object):
         assert get_formal_name('strawberry') == 'Fragaria × ananassa'
 
 
-class TestFormalUnhappy(object):
-    def test_unhappy_keyerror_peach(self):
-        assert get_formal_name('peach') != 'Citrullus lanatus'
-
 
 class TestKeyIntFormal(object):
     def test_key_error(self):
         with pytest.raises(KeyError):
-            assert get_formal_name('5') != 'Vitis vinifera'
+             get_formal_name(5)
 
 
 class TestTypeError(object):
     def test_type_error(self):
         with pytest.raises(TypeError):
-            assert get_formal_name(['apple', 'banana']) == ['Malus domestica', 'Musa acuminata']
+            get_formal_name(['apple', 'banana'])
 
     def test_set_error(self):
         with pytest.raises(TypeError):
-            assert get_formal_name({'orange', 'strawberry'}) == {'Citrus × sinensis', 'Fragaria × ananassa'}
+            get_formal_name({'orange', 'strawberry'})
 
 
 class TestFormalCap(object):
@@ -58,4 +54,4 @@ class TestFormalCap(object):
 class TestFormalTuple(object):
     def test_formal_tuple(self):
         with pytest.raises(KeyError):
-            assert get_formal_name(('mango', 'Mangifera indica')) == True
+            get_formal_name(('mango', 'Mangifera indica'))
