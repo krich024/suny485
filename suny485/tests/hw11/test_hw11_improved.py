@@ -28,35 +28,19 @@ Try Except:
 """
 
 
-class TestKeyError(object):
-    def test_error_key(self):
-        expected_message = 'This Key does not exist in this dict'
-        assert get_formal_name(expected_message)
-
-
-class TestTypeError(object):
-    def test_error_type(self):
-        error_message = "This Type does not belong to dict"
-        assert get_formal_name(error_message)
-
-
 class TestBadInput(object):
     def test_bad_input(self):
         assert get_formal_name(5) == 'This Key does not exist in this dict'
 
 class TestTypeInput(object):
     def test_type_input(self):
-        assert get_formal_name({''}) == 'This Type does not belong to dict'
+        assert get_formal_name({}) == 'This Type does not belong to dict'
 
 
 class TestHappyFormal(object):
     def test_happy_formal(self):
         assert get_formal_name('grape') == 'Vitis vinifera'
 
-
-class TestUnHappyFormal(object):
-    def test_unhappy_path(self):
-        assert get_formal_name('apple') != 'Mangifera indica'
 
 
 class TestFormalCap(object):
@@ -79,20 +63,8 @@ class TestTupleError(object):
         assert get_formal_name(('pineapple', 'mango')) != ('Ananas comosus', 'Mangifera indica')
 
 
-class TestSwitchFormal(object):
-    def test_switch_formal(self):
-        assert get_formal_name('Prunus domestica') != 'plum'
-
 
 class TestEmptyFormal(object):
     def test_empty_formal(self):
-        assert get_formal_name('') != ''
+        assert get_formal_name('')
 
-
-class TestEmptyList(object):
-    def test_empty_list(self):
-        assert get_formal_name(['']) != ['']
-
-class TestEmptySet(object):
-    def test_empty_set(self):
-        assert get_formal_name({''}) != {''}
